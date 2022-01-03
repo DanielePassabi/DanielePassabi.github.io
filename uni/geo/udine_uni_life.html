@@ -89,6 +89,26 @@
             border: 8px #242e43 solid;
         }
         */
+
+        .container-iframe {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+            border: 3px #7AA762 solid;
+            border-radius: 0.25rem;
+        }
+
+        /* Then style the iframe to fit in the container div with full height and width */
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -301,9 +321,29 @@
 
         <p> The distance to the universities is similar, so Massimo has no more doubts and decides to move to the second flat.</p>
 
-        <br>
+        <br><br>
+
+        <h3>Sezione per Sportivi</h3>
+        <p>TODO: scrivere descrizione e incorporare .html completo.</p>
+
+        <div class="row">
+
+            <!-- CARTA 1 -->
+            <div class="col">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-auto container-iframe">
+                            <iframe class="responsive-iframe" src="dataviz/interactive_map_for_running_and_cycling.html"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
+
+    <br>
 
     <br><br><br><br>
     <hr>
