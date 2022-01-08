@@ -32,16 +32,21 @@
             color: #242e43;
         }
 
+        .text-intro {
+            font-size: 22px;
+        }
+
         .bg-dark {
             background-color: #7AA762 !important;
         }
 
         div a {
-            color: #141414 !important;
+            color: #14213D !important;
         }
 
         div a:hover {
-            color: #746f6f !important;
+            color: #fff !important;
+            background-color: #14213D;
         }
 
         .card:hover {
@@ -125,7 +130,7 @@
             background-color: #E8F7DE;
         }
 
-        .custom-interactive{
+        .custom-interactive {
             position: relative;
             overflow: hidden;
             width: 100%;
@@ -139,6 +144,7 @@
             border: 3px #D06462 solid;
             background-color: #F6E0E0;
         }
+
         .red-card:hover {
             transform: scale(1.05);
             border: 3px #ab3633 solid;
@@ -154,20 +160,57 @@
         <p class="lead">Daniele Passabì (221229)</p>
         <img src="images/spinning_world.gif" alt="github_icon" width="100">
         <hr>
-        <p><img src="images/github.ico" alt="github_icon" width="30" height="30"> Code Available in my <a
-                href="https://github.com/DanielePassabi/Uni_GeospatialAnalysisAndRepresentation_UdineProject">Github
-                Repository</a></p>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="row no-gutters">
+                    <div class="col-auto">
+                        <p class="text-center">The Code is Available in my <a
+                                href="https://github.com/DanielePassabi/Uni_GeospatialAnalysisAndRepresentation_UdineProject">Github
+                                Repository </a><img src="images/github.ico" alt="github_icon" width="30" height="30">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row no-gutters">
+                    <div class="col-auto text-start">
+                        <p>You can also explore the notebooks online here:</p>
+                        <ul>
+                            <li>
+                                <p><a href="nb/Map_of_Udine.html">Map of Udine</a></p>
+                            </li>
+                            <li>
+                                <p><a href="nb/Working_with_Strava.html">Interactive Map with Strava Data</a></p>
+                            </li>
+                            <li>
+                                <p><a href="nb/House_Cost_Analysis.html">House Sale/Rent Analysis</a></p>
+                            </li>
+                        </ul>
+                        <br>
+                        <p>Here you can find all the custom functions used:</p>
+                        <ul>
+                            <li>
+                                <p><a href="nb/geopandas_functions.html">Geopandas Functions</a></p>
+                            </li>
+                            <li>
+                                <p><a href="nb/folium_functions.html">Folium Functions</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <br>
 
     <div class="container">
 
-        <br>
-        <h2 class="text-start">Looking for home in Udine?</h2><br>
-        <p class="text-start">You have decided to study in Udine, but are wondering where to live?</p>
-        <p class="text-start">We have just the thing for you.</p>
-
+        <br><br>
+        <h2 class="text-start text-center">Looking for home in Udine?</h2><br>
+        <p class="text-start text-center text-intro">You have decided to study in Udine, but are wondering where to live?</p>
+        <p class="text-start text-center fst-italic text-intro">We have just the thing for you.</p>
         <br>
 
         <p>
@@ -542,7 +585,9 @@
         </p>
 
         <p>
-            TODO: complete description
+            Below are Choropleth maps based on average house prices and rents in the province of Udine.</p>
+        <p>
+            In the visualization Udine has been highlighted through the thick outline.
         </p>
 
         <div class="row">
@@ -577,10 +622,19 @@
 
         </div>
 
-        <br><br>
+        <br>
+        <center>
+            <p>Source (updated to <span class="fst-italic">December 2021</span>): <a
+                    href="https://www.immobiliare.it/mercato-immobiliare/friuli-venezia-giulia/udine-provincia/">Immobiliare.it</a>
+            </p>
+        </center>
+        <br>
 
         <p>
-            Seguono le mappe interattive.
+            We also create an interactive version of the choropleths, in order to facilitate the exploration of the territory.
+        </p>
+        <p>
+            You can change the terrain type via the control centre in the top right-hand corner. By clicking on the municipalities you can get information about the average price of houses in the area.
         </p>
 
         <div class="row">
@@ -595,8 +649,7 @@
                 <div class="">
                     <div class="row no-gutters">
                         <div class="col-auto container-iframe custom-interactive">
-                            <iframe class="responsive-iframe"
-                                src="dataviz/interactive_map_house_sale.html"></iframe>
+                            <iframe class="responsive-iframe" src="dataviz/interactive_map_house_sale.html"></iframe>
                         </div>
                     </div>
                 </div>
@@ -617,8 +670,7 @@
                 <div class="">
                     <div class="row no-gutters">
                         <div class="col-auto container-iframe custom-interactive">
-                            <iframe class="responsive-iframe"
-                                src="dataviz/interactive_map_house_rent.html"></iframe>
+                            <iframe class="responsive-iframe" src="dataviz/interactive_map_house_rent.html"></iframe>
                         </div>
                     </div>
                 </div>
@@ -632,7 +684,9 @@
             <h3>Analisi Statistiche sul prezzo delle case</h3>
         </p>
 
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae eius voluptas nobis repudiandae doloremque pariatur, nesciunt molestias aspernatur corrupti commodi nihil in beatae voluptatum minima eos! Omnis facere fugiat veritatis!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae eius voluptas nobis repudiandae doloremque
+        pariatur, nesciunt molestias aspernatur corrupti commodi nihil in beatae voluptatum minima eos! Omnis facere
+        fugiat veritatis!
 
     </div>
 
