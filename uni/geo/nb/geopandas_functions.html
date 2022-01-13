@@ -14535,7 +14535,6 @@ a.anchor-link {
 
 
 <span class="k">def</span> <span class="nf">extract_info_from_dict</span><span class="p">(</span><span class="n">output_dict</span><span class="p">):</span>
-
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Input:</span>
 <span class="sd">        &gt; dictionary outputted from the function `plot_udine_map()`</span>
@@ -14545,7 +14544,6 @@ a.anchor-link {
 <span class="sd">            - pos 0: df about universities</span>
 <span class="sd">            - pos 1: df about other locations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">list_of_places</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">list_of_closest_name</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">list_of_closest_dist</span> <span class="o">=</span> <span class="p">[]</span>
@@ -14580,7 +14578,9 @@ a.anchor-link {
         <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Closest (name)&#39;</span><span class="p">,</span> <span class="s1">&#39;Closest (distance)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total in 1km Area&#39;</span><span class="p">]</span>
         <span class="p">)</span>
 
+    <span class="c1"># return tuple with 2 res df</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">uni_df</span><span class="p">,</span> <span class="n">location_df</span><span class="p">)</span>
+
 
 <span class="k">def</span> <span class="nf">extract_data_from_OSM</span><span class="p">(</span><span class="n">osm</span><span class="p">,</span> <span class="n">primary_filter</span><span class="p">,</span> <span class="n">secondary_filter</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -14662,7 +14662,6 @@ a.anchor-link {
             <span class="n">dict_to_update</span><span class="p">[</span><span class="s2">&quot;closest_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">edge_lengths</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>  
 
     <span class="k">return</span> <span class="n">dict_to_update</span>
-
 
 
 <span class="k">def</span> <span class="nf">plot_udine_map</span><span class="p">(</span><span class="n">udine_geodf</span><span class="p">,</span> <span class="n">udine_osm</span><span class="p">,</span> <span class="n">list_of_places</span><span class="p">,</span> <span class="n">custom_address</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">show_km_range</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">plot_uni_routes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">list_of_uni</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -14950,13 +14949,7 @@ a.anchor-link {
             <span class="n">list_of_uni_closest_points</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="k">if</span> <span class="n">list_of_uni</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
-                <span class="n">list_of_uni</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="s2">&quot;Dipartimento di Scienze Giuridiche&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Università degli Studi di Udine - Facoltà di Medicina e Chirurgia - Corsi di Laurea Area Sanitaria&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Università degli Studi di Udine - Facoltà di Scienze della Formazione&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Università degli Studi di Udine - Dipartimento di Area medica&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Università degli Studi di Udine - Polo Scientifico dei Rizzi&quot;</span>
-                <span class="p">]</span>
+                <span class="n">list_of_uni</span> <span class="o">=</span> <span class="n">uni_names</span>
 
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">universities</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
                 <span class="n">uni_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>                       

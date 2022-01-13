@@ -14807,6 +14807,7 @@ a.anchor-link {
 
     <span class="c1"># create base map</span>
     <span class="n">house_cost_map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">],</span> <span class="n">zoom_start</span> <span class="o">=</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">poly_group</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">FeatureGroup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Municipalities: Popup and Tooltip&quot;</span><span class="p">)</span>
 
     <span class="c1"># add multiple layers</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; Adding multiple layers&quot;</span><span class="p">)</span>
@@ -14817,6 +14818,7 @@ a.anchor-link {
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; Adding Choropleth&quot;</span><span class="p">)</span>
     <span class="n">folium</span><span class="o">.</span><span class="n">Choropleth</span><span class="p">(</span>
         <span class="n">geo_data</span><span class="o">=</span><span class="n">geodf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Municipalities: Choropleth&quot;</span><span class="p">,</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">geodf</span><span class="p">,</span>
         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Municipality&#39;</span><span class="p">,</span><span class="n">column</span><span class="p">],</span>
         <span class="n">key_on</span><span class="o">=</span><span class="s1">&#39;feature.properties.Municipality&#39;</span><span class="p">,</span>
@@ -14856,7 +14858,10 @@ a.anchor-link {
         <span class="n">folium</span><span class="o">.</span><span class="n">Popup</span><span class="p">(</span><span class="n">iframe</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">poly_geoj</span><span class="p">)</span>
 
         <span class="c1"># add municipality to map</span>
-        <span class="n">poly_geoj</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">house_cost_map</span><span class="p">)</span>
+        <span class="n">poly_geoj</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">poly_group</span><span class="p">)</span>
+
+        <span class="c1"># add poly_group to base map</span>
+        <span class="n">poly_group</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">house_cost_map</span><span class="p">)</span>
 
     <span class="c1"># create layer control</span>
     <span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">house_cost_map</span><span class="p">)</span>

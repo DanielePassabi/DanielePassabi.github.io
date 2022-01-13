@@ -51,8 +51,14 @@
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: scale(1.3);
             border: 4px #376d1b solid;
+            z-index: 100;
+        }
+
+        .big-card:hover {
+            transform: scale(1);
+            border: 3px #376d1b solid;
         }
 
         a {
@@ -131,6 +137,16 @@
             background-color: #E8F7DE;
         }
 
+        .massimo-icon, .elisa-icon {
+            border: 3px #7AA762 solid;
+            border-radius: 0.25rem;
+            padding-top: 1rem;
+            margin: 0 auto;
+            width: 120px;
+            margin-bottom: 1rem;
+            background-color: #FFF;
+        }
+
         .custom-interactive {
             position: relative;
             overflow: hidden;
@@ -147,7 +163,7 @@
         }
 
         .red-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.2);
             border: 3px #ab3633 solid;
         }
     </style>
@@ -179,13 +195,13 @@
                         <p>You can also explore the notebooks online here:</p>
                         <ul>
                             <li>
-                                <p><a href="nb/Map_of_Udine.html">Map of Udine</a></p>
+                                <p><a href="nb/1_Udine_Map_with_Universities_and_Points_of_Interest.html">Udine Map with Universities and Points of Interest</a></p>
                             </li>
                             <li>
-                                <p><a href="nb/Working_with_Strava.html">Interactive Map with Strava Data</a></p>
+                                <p><a href="nb/2_Interactive_Udine_Map_with_Strava_Data.html">Interactive Udine Map with Strava Data</a></p>
                             </li>
                             <li>
-                                <p><a href="nb/House_Cost_Analysis.html">House Sale/Rent Analysis</a></p>
+                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine.html">Analysis of House Sale and Rent Cost in Province of Udine</a></p>
                             </li>
                         </ul>
                         <br>
@@ -202,8 +218,7 @@
                         <p>Spatial Regression Analysis:</p>
                         <ul>
                             <li>
-                                <p><a href="nb/House_Cost_Analysis_R.html">Analysis of House Sale and Rent Cost in
-                                        Udine</a></p>
+                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine_R.html">Analysis of House Sale and Rent Cost in Province of Udine (R)</a></p>
                             </li>
                         </ul>
                     </div>
@@ -226,7 +241,7 @@
         <p>
             <h3>Universities and Points of Interest</h3>
         </p>
-        <p>Below you will find a map of the city of Udine with all the main points of interest in the city for students.
+        <p>Below you will find a map of the city of Udine with all the main points of interest for students.
         </p>
 
         <!-- LINEA 1 -->
@@ -252,7 +267,7 @@
 
             <!-- CARTA 1 -->
             <div class="col">
-                <div class="card">
+                <div class="card big-card">
                     <div class="row no-gutters">
                         <div class="col-auto">
                             <img src="images/udine_complete_map.jpg" class="img-fluid" alt="">
@@ -281,10 +296,12 @@
 
         <div class="massimo">
 
-            <center>
-                <img src="images/massimo.png" height="80">
-                <h5>Massimo</h5>
-            </center>
+            <div class="massimo-icon">
+                <center>
+                    <img src="images/massimo.png" height="80">
+                    <h5>Massimo</h5>
+                </center>
+            </div>
 
             <p>Massimo took the test to get into <span class="fw-bold">medicine</span>, but has not yet received the
                 result.
@@ -474,12 +491,14 @@
 
         <div class="elisa">
 
+            <div class="elisa-icon">
             <center>
                 <img src="images/elisa.png" height="80">
                 <h5>Elisa</h5>
             </center>
+            </div>
 
-            <p>Elisa is hesitant about her choice of university: she has always liked <span class="fw-bold">computer
+            <p>Elisa is hesitant about her choice of university: she has always been interested in <span class="fw-bold">computer
                     science</span>, but she also likes children and would like to enrol in <span
                     class="fw-bold">Educational Sciences</span> to become a teacher.
             </p>
@@ -488,7 +507,7 @@
                 have several <span class="fw-bold">supermarkets</span> nearby so that she can select the best
                 ingredients for her meals.</p>
 
-            <p>She is sporty and likes to ride her <span class="fw-bold">bike</span>, but doesn't have one at the
+            <p>She is sporty and loves to ride her <span class="fw-bold">bike</span>, but doesn't have one at the
                 moment.</p>
 
             <p>She has found 3 available flats:</p>
@@ -801,7 +820,8 @@
 
         <br>
         <center>
-            <p>Source (updated to <span class="fst-italic">December 2021</span>): <a class="fst-italic text-decoration-underline"
+            <p>Source (updated to <span class="fst-italic">December 2021</span>): <a
+                    class="fst-italic text-decoration-underline"
                     href="https://www.immobiliare.it/mercato-immobiliare/friuli-venezia-giulia/udine-provincia/">Immobiliare.it</a>
             </p>
         </center>
@@ -865,7 +885,8 @@
 
         <p class="fst-italic">Are you particularly interested in this topic?</p>
 
-        <p>Click <a class="fst-italic text-decoration-underline" href="nb/House_Cost_Analysis_R.html">here</a> and find out every detail about
+        <p>Click <a class="fst-italic text-decoration-underline" href="nb/House_Cost_Analysis_R.html">here</a> and find
+            out every detail about
             house prices and rentals in the province of Udine thanks to our geospatial analysis.</p>
 
     </div>
