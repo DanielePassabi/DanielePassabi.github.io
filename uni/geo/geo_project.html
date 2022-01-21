@@ -48,6 +48,9 @@
         div a:hover {
             color: #fff !important;
             background-color: #14213D;
+            border-radius: 0.15rem;
+            padding-top: 0.15rem;
+            padding-bottom: 0.15rem;
         }
 
         .card:hover {
@@ -137,7 +140,8 @@
             background-color: #E8F7DE;
         }
 
-        .massimo-icon, .elisa-icon {
+        .massimo-icon,
+        .elisa-icon {
             border: 3px #7AA762 solid;
             border-radius: 0.25rem;
             padding-top: 1rem;
@@ -166,6 +170,18 @@
             transform: scale(1.2);
             border: 3px #ab3633 solid;
         }
+
+        .main-div {
+            background-color: #a2c98d;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .udine-wallpaper {
+            border-radius: 0.25rem;
+        }
     </style>
 </head>
 
@@ -176,36 +192,46 @@
         <h2 class="title_text">Geospatial Analysis and Representation for Data Science</h2>
         <p class="lead">Daniele Passabì (221229)</p>
         <img src="images/spinning_world.gif" alt="github_icon" width="100">
-        <hr>
-        <br>
+        <br><br>
         <div class="row">
-            <div class="col">
+            <div class="col main-div main-div-left">
                 <div class="row no-gutters">
                     <div class="col-auto">
-                        <p class="text-center">The Code is Available in my <a
+                        <p><img src="images/github.png" alt="github_icon" width="35" height="35"> The Code is Available
+                            in my <a
                                 href="https://github.com/DanielePassabi/Uni_GeospatialAnalysisAndRepresentation_UdineProject">Github
-                                Repository </a><img src="images/github.ico" alt="github_icon" width="30" height="30">
+                                Repository</a>
+                        </p>
+                        <br>
+                        <p><img src="images/pdf.png" alt="pdf_icon" width="32" height="32">
+                            Within the repository you can also find the <a
+                                href="https://github.com/DanielePassabi/Uni_GeospatialAnalysisAndRepresentation_UdineProject/blob/main/report.pdf">report</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col main-div">
                 <div class="row no-gutters">
                     <div class="col-auto text-start">
-                        <p>You can also explore the notebooks online here:</p>
+                        <p><img src="images/python_logo.png" alt="python_icon" width="35" height="35"> You can explore
+                            the notebooks online here:</p>
                         <ul>
                             <li>
-                                <p><a href="nb/1_Udine_Map_with_Universities_and_Points_of_Interest.html">Udine Map with Universities and Points of Interest</a></p>
+                                <p><a href="nb/1_Udine_Map_with_Universities_and_Points_of_Interest.html">Udine Map with
+                                        Universities and Points of Interest</a></p>
                             </li>
                             <li>
-                                <p><a href="nb/2_Interactive_Udine_Map_with_Strava_Data.html">Interactive Udine Map with Strava Data</a></p>
+                                <p><a href="nb/2_Interactive_Udine_Map_with_Strava_Data.html">Interactive Udine Map with
+                                        Strava Data</a></p>
                             </li>
                             <li>
-                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine.html">Analysis of House Sale and Rent Cost in Province of Udine</a></p>
+                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine.html">Analysis
+                                        of House Sale and Rent Cost in Province of Udine</a></p>
                             </li>
                         </ul>
                         <br>
-                        <p>Here you can find all the custom functions used:</p>
+                        <p><img src="images/python_logo.png" alt="python_icon" width="35" height="35"> Here you can find
+                            all the custom functions used:</p>
                         <ul>
                             <li>
                                 <p><a href="nb/geopandas_functions.html">Geopandas Functions</a></p>
@@ -215,10 +241,12 @@
                             </li>
                         </ul>
                         <br>
-                        <p>Spatial Regression Analysis:</p>
+                        <p><img src="images/R_logo.png" alt="r_icon" width="35" height="35"> Spatial Regression
+                            Analysis:</p>
                         <ul>
                             <li>
-                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine_R.html">Analysis of House Sale and Rent Cost in Province of Udine (R)</a></p>
+                                <p><a href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine_R.html">Analysis
+                                        of House Sale and Rent Cost in Province of Udine (R)</a></p>
                             </li>
                         </ul>
                     </div>
@@ -235,7 +263,11 @@
         <h2 class="text-start text-center">Looking for home in Udine?</h2><br>
         <p class="text-start text-center text-intro">You have decided to study in Udine, but are wondering where to
             live?</p>
-        <p class="text-start text-center fst-italic text-intro">We have just the thing for you.</p>
+        <center>
+            <a href="https://www.orangesmile.com/travelguide/udine/photo-gallery.htm"><img class="img-fluid udine-wallpaper" src="images/udine_wallpaper.jpg" alt="udine_wallpaper"></a>
+        </center>
+        <br>
+        <p class="text-start text-center fst-italic text-intro">We have just the thing for you!</p>
         <br>
 
         <p>
@@ -492,13 +524,14 @@
         <div class="elisa">
 
             <div class="elisa-icon">
-            <center>
-                <img src="images/elisa.png" height="80">
-                <h5>Elisa</h5>
-            </center>
+                <center>
+                    <img src="images/elisa.png" height="80">
+                    <h5>Elisa</h5>
+                </center>
             </div>
 
-            <p>Elisa is hesitant about her choice of university: she has always been interested in <span class="fw-bold">computer
+            <p>Elisa is hesitant about her choice of university: she has always been interested in <span
+                    class="fw-bold">computer
                     science</span>, but she also likes children and would like to enrol in <span
                     class="fw-bold">Educational Sciences</span> to become a teacher.
             </p>
@@ -885,7 +918,8 @@
 
         <p class="fst-italic">Are you particularly interested in this topic?</p>
 
-        <p>Click <a class="fst-italic text-decoration-underline" href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine_R.html">here</a> and find
+        <p>Click <a class="fst-italic text-decoration-underline"
+                href="nb/3_Analysis_of_House_Sale_and_Rent_Cost_in_Province_of_Udine_R.html">here</a> and find
             out every detail about
             house prices and rentals in the province of Udine thanks to our geospatial analysis.</p>
 
