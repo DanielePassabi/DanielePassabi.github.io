@@ -20,16 +20,20 @@
     <title>Daniele's Personal Website</title>
 
     <style>
+        /* GENERAL SETTINGS */
         body {
-            background-color: #fcfcf9;
+            background-color: #F8D6C9;
         }
 
         .title_text {
             color: #fcfcf9;
         }
 
-        .custom_text {
-            color: #242e43;
+        /* FIRST INTRO DIV SETTINGS */
+
+        .head-div {
+            width: 16.5cm;
+            margin: 0 auto;
         }
 
         .bg-dark {
@@ -37,32 +41,43 @@
         }
 
         .principal_gif {
-            background-color: #9eaba9;
-            border: 1px solid #9eaba9;
+            border: 5px solid #242e43 !important;
             width: 8cm;
+            padding: 0;
         }
 
-        .custom_image {
-            background-color: #4b5b6b;
-            border: 1px solid #4b5b6b;
-        }
+        /* LINKS */
 
         a {
             text-decoration: none;
+            color: #fcfcf9;
         }
 
-        .image_text {
-            color: #242e43 !important;
+        a:hover {
+            color: #fcfcf9 !important;
+            font-style: italic;
+            background-color: #242e43;
+            border-radius: 0.15rem;
+            padding-top: 0.15rem;
+            padding-bottom: 0.15rem;
         }
+
+
+        /* CARDS */
 
         .card {
-            background-color: #9eaba9;
-            border: 12px #9eaba9 solid;
+            background-color: #EBEBEB;
+            border: 5px #242e43 solid;
         }
 
         .card:hover {
-            background-color: #f7f7f7;
-            border: 8px #242e43 solid;
+            transform: scale(1.05);
+            z-index: 100;
+            border: 6px #242e43 solid;
+        }
+
+        .card_text {
+            color: #242e43 !important;
         }
 
     </style>
@@ -71,14 +86,32 @@
 <body>
 
     <br>
-    <div class="h-100 p-5 text-white bg-dark rounded-3 text-center">
-        <h2 class="title_text">Daniele's Personal Website</h2>
+    <div class="h-100 p-5 text-white bg-dark rounded-3 text-center head-div">
+        <h2 class="title_text fst-italic">Daniele's Personal Website</h2>
         <hr>
         <p class="title_text">Here you can access my portfolio and my online projects</p>
-        <img src="images/programming.gif" class="img-thumbnail principal_gif" alt="portfolio">
+        <div class="row">
+            <div class="col">
+                <img src="images/programming.gif" class="img-thumbnail principal_gif" alt="portfolio">
+            </div>
+            <div class="col">
+                <br>
+                <p class="text-start"><img src="images/github.png" alt="github_icon" width="35" height="35">
+                    <a href="https://github.com/DanielePassabi">Github</a>
+                </p>
+                <p class="text-start"><img src="images/linkedin.png" alt="linkedin_icon" width="35" height="35">
+                    <a href="https://www.linkedin.com/in/daniele-passabi/">Linkedin</a>
+                </p>
+                <p class="text-start"><img src="images/youtube.png" alt="yt_icon" width="35" height="35">
+                    <a href="https://www.youtube.com/channel/UCZS5ahBtoMotrFUKpPnBnmA">YouTube</a>
+                </p>
+            </div>
+        </div>
+
+
     </div>
 
-    <br>
+    <br><br>
 
     <div class="container">
 
@@ -91,14 +124,12 @@
                     <div class="card">
                         <div class="row no-gutters">
                             <div class="col-auto">
-                                <img src="images/portfolio_square_text.png" class="img-fluid" alt="">
+                                <img src="images/portfolio_square.JPEG" class="img-fluid" alt="">
                             </div>
                         </div>
-                        <!--
-                        <div class="card-footer text-center image_text">
+                        <div class="card-footer text-center card_text fw-bold fst-italic">
                             My Portfolio
                         </div>
-                        -->
                     </div>
                 </a>
             </div>
@@ -109,8 +140,11 @@
                     <div class="card">
                         <div class="row no-gutters">
                             <div class="col-auto">
-                                <img src="images/big_data_square_text.jpg" class="img-fluid" alt="">
+                                <img src="images/big_data_square.jpg" class="img-fluid" alt="">
                             </div>
+                        </div>
+                        <div class="card-footer text-center card_text fw-bold fst-italic">
+                            Big Data Technologies: Tender Prediction
                         </div>
                     </div>
                 </a>
@@ -118,18 +152,20 @@
 
             <!-- CARTA 3 -->
             <div class="col">
-                <div class="col">
-                    <a href="uni/geo/geo_project.html">
-                        <div class="card">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <img src="images/geo.png" class="img-fluid" alt="">
-                                </div>
+                <a href="uni/geo/geo_project.html">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <img src="images/geo.jpeg" class="img-fluid" alt="">
                             </div>
                         </div>
-                    </a>
-                </div>
-            </div>        
+                        <div class="card-footer text-center card_text fw-bold fst-italic">
+                            Geospatial Analysis: Udine Project
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
         <br>
@@ -144,13 +180,16 @@
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-auto">
-                                    <img src="images/working_text.jpg" class="img-fluid" alt="">
+                                    <img src="images/working.jpg" class="img-fluid" alt="">
                                 </div>
+                            </div>
+                            <div class="card-footer text-center card_text fw-bold fst-italic">
+                                Coming Soon!
                             </div>
                         </div>
                     </a>
                 </div>
-            </div>   
+            </div>
 
             <!-- CARTA 2 -->
             <div class="col">
@@ -159,13 +198,16 @@
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-auto">
-                                    <img src="images/working_text.jpg" class="img-fluid" alt="">
+                                    <img src="images/working.jpg" class="img-fluid" alt="">
                                 </div>
+                            </div>
+                            <div class="card-footer text-center card_text fw-bold fst-italic">
+                                Coming Soon!
                             </div>
                         </div>
                     </a>
                 </div>
-            </div>   
+            </div>
 
             <!-- CARTA 3 -->
             <div class="col">
@@ -174,13 +216,16 @@
                         <div class="card">
                             <div class="row no-gutters">
                                 <div class="col-auto">
-                                    <img src="images/working_text.jpg" class="img-fluid" alt="">
+                                    <img src="images/working.jpg" class="img-fluid" alt="">
                                 </div>
+                            </div>
+                            <div class="card-footer text-center card_text fw-bold fst-italic">
+                                Coming Soon!
                             </div>
                         </div>
                     </a>
                 </div>
-            </div>        
+            </div>
         </div>
 
     </div>
