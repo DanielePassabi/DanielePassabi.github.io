@@ -1,0 +1,56 @@
+/* General Settings */
+body {
+    background-color: #ffbba6;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+
+/* Custom initial image */
+#running_games {
+    display: block;
+    margin: 0 auto;
+    width: 30rem;
+    padding: 3rem;
+}
+
+/* Years Links */
+.year-link {
+    background-color: #bad9db;
+    border: 2px #797d9a solid;
+    margin: 0 0.5rem;
+    margin-bottom: 2.5rem;
+    border-radius: 3px;
+    padding-top: 0.75rem;
+}
+
+.year-link h1 {
+    font-size: 4rem;
+}
+
+a {
+    color: #797d9a;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #797d9a;
+}
+
+.year-link:hover {
+    background-color: #f7f3c7;
+    border: 2px #797d9a solid;
+}
+
+.coming-soon {
+    visibility: hidden;
+}
+
+/* Cute animation */
+.year-link {
+    transition: all 0.3s;
+}
+
+.year-link:hover {
+    transition: all 0.3s;
+    transform: scale(1.15, 1.15);
+}
