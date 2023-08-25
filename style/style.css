@@ -1,12 +1,15 @@
+.html {
+    background-color: #F4F4F4;
+    font-family: 'Raleway', sans-serif;
+}
+
 /* PAGE 01 */
 
 .custom-div {
-    background-color: #F4F4F4;
     border: 1px solid #E3E3E3;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    margin: 2px auto;
-    padding: 10px;
+    margin: 0 auto;
     box-sizing: border-box;
 }
 
@@ -14,38 +17,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
 }
 
 .big-year {
-    font-size: 14em;
-    margin-right: 20px;
-    padding-right: 0.25em;
+    font-size: 8vw; /* Adjust for Responsiveness */
+    font-weight: 400;
+    margin: 2vw;
     color: #373737;
 }
 
-.text-portfolio,
-.text-name {
+#text-portfolio,
+#text-name {
     text-align: left;
-    display: block;
     font-family: 'Raleway', sans-serif;
     color: #373737;
 }
 
-.text-portfolio {
-    font-weight: 600;
-    font-size: 5em;
-    letter-spacing: 0.75em;
-    margin-bottom: -0.35em;
+#text-portfolio {
+    font-weight: 300;
+    font-size: 5vh;
+    letter-spacing: 2vh;
+    margin-bottom: -0.35vh;
 }
 
-.text-name {
+#text-name {
     font-style: italic;
-    margin-bottom: -0.35em;
-    font-size: 4em;
+    font-weight: 200;
+    margin-bottom: -0.35vh;
+    font-size: 4vh;
 }
 
 
@@ -77,47 +78,178 @@
 }
 
 .inner-image {
-    max-width: 100%;
+    max-width: 95%;
     max-height: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
-    /*border-radius: 10px;  /* Adjust as needed */
+    border-radius: 10px;
 }
 
-.text-aboutme {
-    font-weight: 600;
-    font-size: 5em;
-    letter-spacing: 0.75em;
-    margin-bottom: -0.35em;
+#text-aboutme {
+    font-weight: 300;
+    font-size: 5vh;
+    letter-spacing: 0.75vh;
+    margin-bottom: -0.35vh;
     color: #373737;
 }
 
 .text-aboutme-desc {
-    margin-top: 1.25em;
-    font-size: 2.5em;
-    letter-spacing: 0.05em;
-    margin-bottom: -0.35em;
+    margin-top: 1.25vh;
+    font-size: 1.75vh;
+    letter-spacing: 0.05vh;
+    margin-bottom: -0.35vh;
     color: #373737;
 }
 
 .container-aboutme {
-    width: 90em;
+    width: 90%;
 }
 
 .container-icons {
-    margin-top: 5em;
+    margin-top: 5vh;
     display: flex;
     justify-content: space-between;  
-    width: 30em;               
+    width: 30vh;               
 }
 
 .icon-link img {
-    width: 5em;                     /* Adjust based on your icon size */
-    height: 5em;                    /* Adjust based on your icon size */
+    width: 4vh;                     /* Adjust based on your icon size */
+    height: 4vh;                    /* Adjust based on your icon size */
     transition: opacity 0.3s;       /* Smooth opacity transition for hover effect */
 }
 
 .icon-link:hover img {
     opacity: 0.7;                    /* Change opacity on hover for a subtle effect */
+}
+
+#hpa-icon img {
+    border-radius: 50%;
+}
+
+/* PAGE 03 */
+
+#div-page3 {
+    /* Flexbox properties to center content */
+    display: flex;
+    flex-direction: column;  /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center;     /* Center children horizontally */
+    text-align: center;      /* Ensure text itself is centered */
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;  /* Set container to 80% of the parent width */
+    margin: 0 auto;  /* Center the container */
+}
+
+.project {
+    flex: 1;  /* Allow the div to grow and occupy available space */
+    min-width: calc(25% - 20px);  /* Minimum width set to 20% of container width minus margins */
+    height: 15vh;
+    margin: 10px;
+    background-color: #E3E3E3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative; /* Added for overlay */
+    border-radius: 10px;
+}
+
+.project {
+    /* ...existing styles... */
+    transition: all 0.3s ease; /* Smooth transition for all changes */
+}
+
+.project:hover {
+    transform: scale(1.05);  /* 5% larger */
+    background-color: #FFCDB2;  /* Change background to red */
+    border-radius: 3px;
+}
+
+
+.project-content {
+    text-align: center; /* Centers the text inside */
+}
+
+.text-project-title, .text-project-desc {
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#text-myprojects {
+    font-weight: 300;
+    font-size: 5vh;
+    letter-spacing: 0.75vh;
+    color: #373737;
+}
+
+.text-project-title {
+    font-size: 1.5vh;
+    font-weight: bold;
+}
+
+.text-project-desc {
+    font-size: 1vh;
+    margin-top: 10px;
+}
+
+/**********************************************************************/
+
+/* Media Query for smaller devices */
+@media (max-width: 768px) {
+
+    .custom-div {
+        border: 0px solid #E3E3E3;
+    }
+
+    .big-year {
+        font-size: 14vw; /* Adjust for smaller screens */
+        margin: 1vw;
+    }
+
+    #text-portfolio,
+    #text-name,
+    #text-aboutme,
+    #text-myprojects {
+        font-size: 2.75vh;
+    }
+
+    #text-portfolio {
+        letter-spacing: 1.25vh;
+    }
+
+    .text-aboutme-desc {
+        font-size: 1.75vh;
+    }
+
+    .container-aboutme {
+        width: 90%; /* Changed from fixed to flexible */
+    }
+
+    .container-icons {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon-link img {
+        width: 4vh; /* Smaller icon size */
+        height: 4vh; /* Smaller icon size */
+    }
+
+    .one-third, .two-thirds {
+        width: 100%; /* Stack horizontally */
+    }
+
+    .project {
+        min-width: calc(50% - 20px);  /* Minimum width set to 20% of container width minus margins */
+        height: 20vh;
+        margin: 5px;
+    }
+
 }
