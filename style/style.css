@@ -118,8 +118,13 @@
     transition: opacity 0.3s;       /* Smooth opacity transition for hover effect */
 }
 
+.icon-link img {
+    transition: all 0.3s ease; /* Smooth transition for all changes */
+}
+
 .icon-link:hover img {
-    opacity: 0.7;                    /* Change opacity on hover for a subtle effect */
+    transform: scale(1.1);
+    opacity: 0.8;
 }
 
 #hpa-icon img {
@@ -141,15 +146,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 80%;  /* Set container to 80% of the parent width */
+    width: 90%;  /* Set container to 90% of the parent width */
     margin: 0 auto;  /* Center the container */
+}
+
+.container-myprojects-intro {
+    width: 90%;  /* Set container to 90% of the parent width */
 }
 
 .project {
     flex: 1;  /* Allow the div to grow and occupy available space */
-    min-width: calc(25% - 20px);  /* Minimum width set to 20% of container width minus margins */
-    height: 15vh;
-    margin: 10px;
+    min-width: calc(25% - 40px);  /* Minimum width set to 20% of container width minus margins */
+    height: 20vh;
+    margin: 20px;
     background-color: #E3E3E3;
     display: flex;
     align-items: center;
@@ -165,20 +174,28 @@
 }
 
 .project:hover {
-    transform: scale(1.05);  /* 5% larger */
-    background-color: #FFCDB2;  /* Change background to red */
+    transform: scale(1.05);
+    background-color: #FFCDB2;
     border-radius: 3px;
 }
 
-
 .project-content {
     text-align: center; /* Centers the text inside */
+    width: 100%;
 }
 
-.text-project-title, .text-project-desc {
+.project-icon {
+    position: absolute;  /* Take it out of the flow of the document */
+    top: -13px;          /* Push it down from the top */
+    left: -11px;         /* Push it right from the left side */
+    width: 3vh;          /* Set the width of the icon */
+    height: 3vh;         /* Set the height of the icon */
+}
+
+.text-project-title, .text-project-desc, .text-project-role {
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -192,11 +209,28 @@
 .text-project-title {
     font-size: 1.5vh;
     font-weight: bold;
+    letter-spacing: 0.1vh;
 }
 
 .text-project-desc {
-    font-size: 1vh;
+    font-size: 1.2vh;
     margin-top: 10px;
+}
+
+.text-project-role {
+    font-size: 1vh;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+
+#div-page4 {
+    /* Flexbox properties to center content */
+    display: flex;
+    flex-direction: column;  /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center;     /* Center children horizontally */
+    text-align: center;      /* Ensure text itself is centered */
 }
 
 /**********************************************************************/
@@ -248,8 +282,29 @@
 
     .project {
         min-width: calc(50% - 20px);  /* Minimum width set to 20% of container width minus margins */
-        height: 20vh;
-        margin: 5px;
+        height: 16vh;
+        margin: 10px;
+    }
+
+    #div-page3 {
+        margin-top: 30vh;
+    }
+
+    .text-project-title {
+        font-size: 1.25vh;
+        font-weight: bold;
+        letter-spacing: 0.1vh;
+    }
+    
+    .text-project-desc {
+        font-size: 1vh;
+        margin-top: 10px;
+    }
+    
+    .text-project-role {
+        font-size: 0.85vh;
+        margin-top: 15px;
+        font-style: italic;
     }
 
 }
