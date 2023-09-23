@@ -15,55 +15,45 @@ def handler(event, context):
     Handler function for Netlify Function.
     """
 
-    debug_dict = {'test': 'dummy'}
+    print("[Scrape.py] Execution Started")
 
-    return {
-        'statusCode': 200,
-        'body': json.dumps(debug_dict),
-        'headers': {
-            'Content-Type': 'application/json'
+    print("[Scrape.py] - Obtaining Dataset from HTML")
+    try:
+        dataframe = parse_html_table_to_dataframe()
+    except Exception as exc:
+        print(f"[Scrape.py] - Error! Details: {exc}")
+
+        debug_dict = {
+            'function': 'parse_html_table_to_dataframe()',
+            'error': exc,
+            'traceback': traceback.format_exc()
         }
-    }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(debug_dict),
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+        }
 
-    # print("[Scrape.py] Execution Started")
+    print("[Scrape.py] - Updating Scraped Dataset")
+    try:
+        dataframe = apply_data_transformations(dataframe)
+    except Exception as exc:
+        print(f"[Scrape.py] - Error! Details: {exc}")
 
-    # print("[Scrape.py] - Obtaining Dataset from HTML")
-    # try:
-    #     dataframe = parse_html_table_to_dataframe()
-    # except Exception as exc:
-    #     print(f"[Scrape.py] - Error! Details: {exc}")
-
-    #     debug_dict = {
-    #         'function': 'parse_html_table_to_dataframe()',
-    #         'error': exc,
-    #         'traceback': traceback.format_exc()
-    #     }
-    #     return {
-    #         'statusCode': 500,
-    #         'body': json.dumps(debug_dict),
-    #         'headers': {
-    #             'Content-Type': 'application/json'
-    #         },
-    #     }
-
-    # print("[Scrape.py] - Updating Scraped Dataset")
-    # try:
-    #     dataframe = apply_data_transformations(dataframe)
-    # except Exception as exc:
-    #     print(f"[Scrape.py] - Error! Details: {exc}")
-
-    #     debug_dict = {
-    #         'function': 'apply_data_transformations()',
-    #         'error': exc,
-    #         'traceback': traceback.format_exc()
-    #     }
-    #     return {
-    #         'statusCode': 500,
-    #         'body': json.dumps(debug_dict),
-    #         'headers': {
-    #             'Content-Type': 'application/json'
-    #         },
-    #     }
+        debug_dict = {
+            'function': 'apply_data_transformations()',
+            'error': exc,
+            'traceback': traceback.format_exc()
+        }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(debug_dict),
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+        }
 
     print("[Scrape.py] - Finding Best BTPs")
     try:
