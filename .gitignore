@@ -1,2 +1,5 @@
 
 *.ini
+
+# Local Netlify folder
+.netlify
