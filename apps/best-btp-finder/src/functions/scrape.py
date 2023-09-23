@@ -1,7 +1,14 @@
-from bs4 import BeautifulSoup
-import pandas as pd
-import requests
+"""
+Custom function to retrieve BTPs info
+"""
+
+# libraries
 import json
+import requests
+import traceback
+import pandas as pd
+from bs4 import BeautifulSoup
+
 
 def handler(event, context):
     """
@@ -11,20 +18,68 @@ def handler(event, context):
     print("[Scrape.py] Execution Started")
 
     print("[Scrape.py] - Obtaining Dataset from HTML")
-    dataframe = parse_html_table_to_dataframe()
+    try:
+        dataframe = parse_html_table_to_dataframe()
+    except Exception as exc:
+        print(f"[Scrape.py] - Error! Details: {exc}")
+
+        debug_dict = {
+            'function': 'parse_html_table_to_dataframe()',
+            'error': exc,
+            'traceback': traceback.format_exc()
+        }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(debug_dict),
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+        }
 
     print("[Scrape.py] - Updating Scraped Dataset")
-    dataframe = apply_data_transformations(dataframe)
+    try:
+        dataframe = apply_data_transformations(dataframe)
+    except Exception as exc:
+        print(f"[Scrape.py] - Error! Details: {exc}")
+
+        debug_dict = {
+            'function': 'apply_data_transformations()',
+            'error': exc,
+            'traceback': traceback.format_exc()
+        }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(debug_dict),
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+        }
 
     print("[Scrape.py] - Finding Best BTPs")
-    best_btps = found_best_btps(
-        dataframe,
-        min_cedola=3,
-        max_durata=10,
-        min_durata=1,
-        min_rendimento=3.5,
-        max_prezzo=99
-        )
+    try:
+        best_btps = found_best_btps(
+            dataframe,
+            min_cedola=3,
+            max_durata=10,
+            min_durata=1,
+            min_rendimento=3.5,
+            max_prezzo=99
+            )
+    except Exception as exc:
+        print(f"[Scrape.py] - Error! Details: {exc}")
+
+        debug_dict = {
+            'function': 'found_best_btps()',
+            'error': exc,
+            'traceback': traceback.format_exc()
+        }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(debug_dict),
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+        }
 
     print("[Scrape.py] - Returning Best BTPs (end of execution)")
     return {

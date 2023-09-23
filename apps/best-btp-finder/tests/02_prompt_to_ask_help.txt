@@ -1,0 +1,42 @@
+I have a web application, hosted on Github.io. I use Netlify as support to call my Python functions.
+
+This is what I have so far:
+
+website/
+│
+├── apps/
+│   └── best-btp-finder/
+│       ├── .netlify/
+│       │   └── state.json
+│       │
+│       ├── src/
+│       │   ├── css
+│       │   │   └── styles.css
+│       │   ├── functions
+│       │   │   ├── scrape.py
+│       │   │   └── requirements.txt
+│       │   ├── js
+│       │   │   └── script.css
+│       │   └── index.html
+│       │
+│       └── netlify.toml
+│
+│
+└── other files ...
+
+
+--------------------------------------------
+styles.css
+--------------------------------------------
+scrape.py
+--------------------------------------------
+requirements.txt
+--------------------------------------------
+script.js
+--------------------------------------------
+index.html
+--------------------------------------------
+netlify.toml
+--------------------------------------------
+
+Custom question here
