@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('[script.js] Obtaining Result Div')
     const resultDiv = document.getElementById('result');
 
-    console.log("[script.js] Launching 'scrape' function")
+    console.log("[script.js] Ready to launch 'scrape' function")
+
     fetchDataButton.addEventListener('click', async () => {
         try {
             const response = await fetch('/.netlify/functions/scrape');
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultDiv.innerHTML = JSON.stringify(data);
             } else {
                 console.log("[script.js] - Response NOT OK. Status:", response.status)
+                console.log(response)
                 resultDiv.innerHTML = `Error: Received status code ${response.status}`;
             }
         } catch (error) {
