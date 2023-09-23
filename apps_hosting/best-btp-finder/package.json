@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "cheerio": "^1.0.0-rc.12",
     "node-fetch": "^3.3.2",
     "pandas-js": "^0.2.4"

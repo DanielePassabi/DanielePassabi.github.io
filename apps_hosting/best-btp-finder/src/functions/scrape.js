@@ -1,8 +1,11 @@
-const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const DataFrame = require('pandas-js').DataFrame;
 
-async function handler(event, context) {
+exports.handler = async function(event, context) {
+
+  const fetchModule = await import('node-fetch');
+  const fetch = fetchModule.default;
+
   try {
     const dataframe = await parseHtmlTableToDataFrame();
     const transformedDataframe = applyDataTransformations(dataframe);
