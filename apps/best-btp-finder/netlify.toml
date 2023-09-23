@@ -1,3 +1,3 @@
 [build]
-  functions = "apps/best-btp-finder/src/functions"
-  publish = "src"
+  functions = "/opt/build/repo/apps/best-btp-finder/src/functions"
+  publish = "/opt/build/repo/apps/best-btp-finder"
