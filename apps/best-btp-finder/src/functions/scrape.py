@@ -7,8 +7,16 @@ def handler(event, context):
     """
     Handler function for Netlify Function.
     """
+
+    print("[Scrape.py] Execution Started")
+
+    print("[Scrape.py] - Obtaining Dataset from HTML")
     dataframe = parse_html_table_to_dataframe()
+
+    print("[Scrape.py] - Updating Scraped Dataset")
     dataframe = apply_data_transformations(dataframe)
+
+    print("[Scrape.py] - Finding Best BTPs")
     best_btps = found_best_btps(
         dataframe,
         min_cedola=3,
@@ -18,6 +26,7 @@ def handler(event, context):
         max_prezzo=99
         )
 
+    print("[Scrape.py] - Returning Best BTPs (end of execution)")
     return {
         'statusCode': 200,
         'body': json.dumps(best_btps.to_dict(orient='records')),
