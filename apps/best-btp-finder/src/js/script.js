@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('[script.js] Obtaining Result Div')
     const resultDiv = document.getElementById('result');
 
-    console.log("[script.js] Ready to launch 'scrape' function")
+    console.log("[script.js] Ready to launch dummy 'scrape' function")
 
     fetchDataButton.addEventListener('click', async () => {
         try {
