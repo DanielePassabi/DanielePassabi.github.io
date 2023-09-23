@@ -26,11 +26,44 @@
     <br>
     <div class="centered-content">
         <h1>Best BTP Finder</h1>
-        <p>To get personalized results, please complete the following fields and click Search</p>
-        <button id="fetchData">Search</button>
+        <p>Per ottenere risultati personalizzati, compila i seguenti campi e clicca su Cerca</p>
+
+        <!-- Add this section to your HTML -->
+        <form class="form-group">
+            <div class="form-group mb-2">
+                <label for="minCedola">Cedola Minima</label>
+                <input class="form-control" type="number" id="minCedola" value="2.25">
+            </div>
+            <div class="form-group mb-2">
+                <label for="minRendimento">Rendimento Minimo</label>
+                <input class="form-control" type="number" id="minRendimento" value="3.25">
+            </div>
+            <div class="form-group mb-2">
+                <label for="maxPrezzo">Prezzo Massimo</label>
+                <input class="form-control" type="number" id="maxPrezzo" value="97">
+            </div>
+            <div class="form-group mb-2">
+                <label for="minDurata">Durata Minima</label>
+                <input class="form-control" type="number" id="minDurata" value="2">
+            </div>
+            <div class="form-group mb-2">
+                <label for="maxDurata">Durata Massima</label>
+                <input class="form-control" type="number" id="maxDurata" value="10">
+            </div>
+        </form>
+
+        <!-- Add more input fields for other parameters -->
+        <button id="fetchData" class="btn btn-secondary">Cerca</button>
+
+    </div>
+    <br>
+    <div class="centered-content">
         <div id="result"></div>
         <script src="js/script.js"></script>
     </div>
+
+</div>
+
 </body>
 
 </html>

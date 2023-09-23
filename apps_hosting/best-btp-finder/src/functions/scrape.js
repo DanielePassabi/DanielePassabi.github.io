@@ -7,9 +7,23 @@ exports.handler = async function(event, context) {
   const fetch = fetchModule.default;
 
   try {
+
+    // Read the parameters from the query string
+    const minCedola = event.queryStringParameters['minCedola'];
+    const minRendimento = event.queryStringParameters['minRendimento'];
+    const minDurata = event.queryStringParameters['minDurata'];
+    const maxDurata = event.queryStringParameters['maxDurata'];
+    const maxPrezzo = event.queryStringParameters['maxPrezzo'];
+
+    console.log('[scrape.js] minCedola:', minCedola)
+    console.log('[scrape.js] minRendimento:', minRendimento)
+    console.log('[scrape.js] minDurata:', minDurata)
+    console.log('[scrape.js] maxDurata:', maxDurata)
+    console.log('[scrape.js] maxPrezzo:', maxPrezzo)
+
     const dataframe = await parseHtmlTableToDataFrame();
     const transformedDataframe = applyDataTransformations(dataframe);
-    const bestBtps = findBestBtps(transformedDataframe, 3, 3.5, 1, 10, 99);
+    const bestBtps = findBestBtps(transformedDataframe, minCedola, minRendimento, minDurata, maxDurata, maxPrezzo);
     return {
       statusCode: 200,
       body: JSON.stringify(bestBtps),
