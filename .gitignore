@@ -4,6 +4,9 @@
 # Local Netlify folder
 .netlify
 
+# VSCode Settings
+.vscode
+
 ############################################################
 
 # Byte-compiled / optimized / DLL files

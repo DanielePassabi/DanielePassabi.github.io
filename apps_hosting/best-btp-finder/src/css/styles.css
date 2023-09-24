@@ -1,5 +1,5 @@
-.html {
-    background-color: #F4F4F4;
+html {
+    /* background-color: #F4F4F4; */
     font-family: 'Raleway', sans-serif;
 }
 
@@ -10,4 +10,30 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .centered-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .centered-content {
+        display: flex;
+        align-items: normal;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
 }
