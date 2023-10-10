@@ -51,7 +51,7 @@ exports.handler = async function (event, context) {
   console.log("---")
 
   // Log Year path
-  const yearPath = path.join(__dirname, "..", "images", year);
+  const yearPath = path.join(__dirname, "images", year);
   console.log("Year Path: ", yearPath);
   console.log("---")
 
