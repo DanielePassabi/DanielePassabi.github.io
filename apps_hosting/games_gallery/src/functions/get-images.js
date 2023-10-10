@@ -50,8 +50,8 @@ exports.handler = async function (event, context) {
   console.log("---")
 
   // Log entire directory structure starting from root
-  console.log("Entire Directory Structure:");
-  traverseDir(process.cwd());
+  console.log("Entire Directory Structure (var):");
+  traverseDir(DirName_minus1);
   console.log("---")
 
   try {
