@@ -37,13 +37,6 @@ exports.handler = async function (event, context) {
   console.log(rootDirName);
   console.log("---")
 
-  // Log current directory - 1
-  const DirName_minus1 = path.join(__dirname, "..");
-  console.log("Current directory - 1: ", DirName_minus1);
-  const rootDirName_minus1 = fs.readdirSync(DirName_minus1);
-  console.log(rootDirName_minus1);
-  console.log("---")
-
   // Log root directory
   console.log("Root directory: ", process.cwd());
   const rootDirContent = fs.readdirSync(process.cwd());
@@ -55,18 +48,10 @@ exports.handler = async function (event, context) {
   console.log("Year Path: ", yearPath);
   console.log("---")
 
-  // Log Absolute Year path
-  const absoluteYearPath = path.resolve(yearPath);
-  console.log("Absolute Year Path:", absoluteYearPath);
-  console.log("---")
-
-  // Log entire directory structure starting from root
-  // console.log("Entire Directory Structure (var):");
-  // traverseDir(DirName_minus1);
-  // console.log("---")
-
   try {
     const files = fs.readdirSync(yearPath);
+    console.log('Files in yearPath:', files);
+
     return {
       statusCode: 200,
       body: JSON.stringify(files)

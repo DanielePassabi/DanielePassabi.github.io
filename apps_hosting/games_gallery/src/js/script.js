@@ -38,7 +38,7 @@ async function loadImages(year) {
         if (Array.isArray(imageFiles)) {
             imageFiles.forEach(file => {
                 const imgElement = document.createElement('img');
-                imgElement.src = `../images/${year}/${file}`;
+                imgElement.src = `functions/images/${year}/${file}`;
                 imgElement.alt = `${year} - ${file}`;
     
                 const aspectRatioBox = document.createElement('div');
