@@ -35,21 +35,26 @@ async function loadImages(year) {
         const response = await fetch(`/.netlify/functions/get-images?year=${year}`);
         const imageFiles = await response.json();
 
-        imageFiles.forEach(file => {
-            const imgElement = document.createElement('img');
-            imgElement.src = `../images/${year}/${file}`;
-            imgElement.alt = `${year} - ${file}`;
+        if (Array.isArray(imageFiles)) {
+            imageFiles.forEach(file => {
+                const imgElement = document.createElement('img');
+                imgElement.src = `../images/${year}/${file}`;
+                imgElement.alt = `${year} - ${file}`;
+    
+                const aspectRatioBox = document.createElement('div');
+                aspectRatioBox.className = 'aspect-ratio-box';
+                aspectRatioBox.appendChild(imgElement);
+    
+                const colElement = document.createElement('div');
+                colElement.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';  // Added margin-bottom (mb-4) for spacing
+                colElement.appendChild(aspectRatioBox);
+    
+                imagesContainer.appendChild(colElement);
+            });
+        } else {
+            console.error('Unexpected response:', imageFiles);
+        }
 
-            const aspectRatioBox = document.createElement('div');
-            aspectRatioBox.className = 'aspect-ratio-box';
-            aspectRatioBox.appendChild(imgElement);
-
-            const colElement = document.createElement('div');
-            colElement.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';  // Added margin-bottom (mb-4) for spacing
-            colElement.appendChild(aspectRatioBox);
-
-            imagesContainer.appendChild(colElement);
-        });
     } catch (error) {
         console.error('Error fetching images:', error);
     }
