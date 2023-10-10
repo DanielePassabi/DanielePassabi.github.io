@@ -53,14 +53,17 @@ exports.handler = async function (event, context) {
   // Log Year path
   const yearPath = path.join(__dirname, "..", "images", year);
   console.log("Year Path: ", yearPath);
-  // const yearPathContent = fs.readdirSync(yearPath);
-  // console.log(yearPathContent);
+  console.log("---")
+
+  // Log Absolute Year path
+  const absoluteYearPath = path.resolve(yearPath);
+  console.log("Absolute Year Path:", absoluteYearPath);
   console.log("---")
 
   // Log entire directory structure starting from root
-  console.log("Entire Directory Structure (var):");
-  traverseDir(DirName_minus1);
-  console.log("---")
+  // console.log("Entire Directory Structure (var):");
+  // traverseDir(DirName_minus1);
+  // console.log("---")
 
   try {
     const files = fs.readdirSync(yearPath);

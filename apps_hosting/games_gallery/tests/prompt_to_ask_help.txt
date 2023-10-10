@@ -1,0 +1,289 @@
+I have a web application, hosted on Github.io. I use Netlify as support to call my Python functions.
+
+This is what I have so far:
+
+website/
+│
+├── apps_hosting/
+│   └── games_gallery/
+│       ├── .netlify/
+│       │   └── state.json
+│       │
+│       ├── src/
+│       │   ├── css
+│       │   │   └── styles.css
+│       │   ├── functions
+│       │   │   └── get-images.js
+│       │   ├── images
+│       │   │   ├── 2022
+│       │   │   │    ├── image1.jpg
+│       │   │   │    └── image2.jpg
+│       │   │   └── 2023
+│       │   │   │    ├── imageA.jpg
+│       │   │   │    └── imageB.jpg
+│       │   ├── js
+│       │   │   └── script.css
+│       │   └── index.html
+│       │
+│       └── netlify.toml
+│
+│
+└── other files ...
+
+--------------------------------------------
+index.html
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Games Gallery | Daniele Passabì</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom Icon -->
+    <link rel="icon" href="icons/website_icon.png">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Games Gallery</h1>
+        <p>Click on a year to explore my gaming adventures!</p>
+        <div id="years-container" class="btn-group mt-3 mb-5" role="group">
+            <!-- Years will be populated here -->
+        </div>
+
+        <div id="main-container" class="btn-group mt-3 mb-5" role="group">
+            <div id="images-container" class="row">
+                <!-- Images will be displayed here -->
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+--------------------------------------------
+styles.css
+
+.html {
+    background-color: #F4F4F4;
+    font-family: 'Raleway', sans-serif;
+}
+
+#years-container {
+    margin-bottom: 3vw;
+}
+
+.year-button {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.aspect-ratio-box {
+    position: relative;
+    overflow: visible;
+}
+
+.aspect-ratio-box>img {
+    width: 100%;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+}
+
+/* TEXT SETTINGS */
+button {
+    font-size: 1.25vw !important;
+}
+
+
+/* ANIMATION SETTINGS */
+
+.aspect-ratio-box>img:hover {
+    transform: scale(1.05);
+}
+
+/* OVERRIDE BOOTSTRAP SETTINGS */
+
+.btn-group {
+    display: flex;
+    height: fit-content;
+}
+
+.container {
+    max-width: 90%;
+}
+
+.me-2 {
+    margin-right: 0rem!important;
+    border: 1px #F4F4F4 solid;
+}
+--------------------------------------------
+script.js
+
+let selectedButton = null;  // to keep track of the currently selected button
+const years = ['2022', '2023'];  // you can dynamically populate this later
+
+window.addEventListener('DOMContentLoaded', () => {
+    const yearsContainer = document.getElementById('years-container');
+
+    years.forEach(year => {
+        const yearButton = document.createElement('button');
+        yearButton.textContent = year;
+        yearButton.className = 'btn btn-dark me-2';
+        yearButton.onclick = () => {
+            // Deselect previously selected button
+            if (selectedButton) {
+                selectedButton.classList.remove('btn-success');
+                selectedButton.classList.add('btn-dark');
+            }
+
+            // Select the clicked button
+            yearButton.classList.remove('btn-dark');
+            yearButton.classList.add('btn-success');
+
+            selectedButton = yearButton;  // update the currently selected button
+
+            loadImages(year);
+        };
+        yearsContainer.appendChild(yearButton);
+    });
+});
+
+async function loadImages(year) {
+    const imagesContainer = document.getElementById('images-container');
+    imagesContainer.innerHTML = '';  // clear previous images
+
+    try {
+        const response = await fetch(`/.netlify/functions/get-images?year=${year}`);
+        const imageFiles = await response.json();
+
+        if (Array.isArray(imageFiles)) {
+            imageFiles.forEach(file => {
+                const imgElement = document.createElement('img');
+                imgElement.src = `../images/${year}/${file}`;
+                imgElement.alt = `${year} - ${file}`;
+    
+                const aspectRatioBox = document.createElement('div');
+                aspectRatioBox.className = 'aspect-ratio-box';
+                aspectRatioBox.appendChild(imgElement);
+    
+                const colElement = document.createElement('div');
+                colElement.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';  // Added margin-bottom (mb-4) for spacing
+                colElement.appendChild(aspectRatioBox);
+    
+                imagesContainer.appendChild(colElement);
+            });
+        } else {
+            console.error('Unexpected response:', imageFiles);
+        }
+
+    } catch (error) {
+        console.error('Error fetching images:', error);
+    }
+}
+--------------------------------------------
+get-images.js
+
+const fs = require('fs');
+const path = require('path');
+
+const traverseDir = (dir, level = 0) => {
+  try {
+    // Get all files and folders in directory
+    const files = fs.readdirSync(dir);
+
+    // Log each file and folder
+    files.forEach(file => {
+      console.log('  '.repeat(level) + '├─ ' + file);
+
+      // Check if it's a directory
+      const filePath = path.join(dir, file);
+      const stats = fs.statSync(filePath);
+      if (stats.isDirectory()) {
+        // Recurse into the folder
+        traverseDir(filePath, level + 1);
+      }
+    });
+  } catch (error) {
+    if (error.code === 'EACCES') {
+      console.warn(`⚠️ Warning: Permission denied to access ${dir}`);
+    } else {
+      console.error(`⚠️ Error reading ${dir}: ${error.message}`);
+    }
+  }
+};
+
+exports.handler = async function (event, context) {
+  const year = event.queryStringParameters.year;
+  
+
+  // Log current directory
+  console.log("Current directory: ", __dirname);
+  const rootDirName = fs.readdirSync(__dirname);
+  console.log(rootDirName);
+  console.log("---")
+
+  // Log current directory - 1
+  const DirName_minus1 = path.join(__dirname, "..");
+  console.log("Current directory - 1: ", DirName_minus1);
+  const rootDirName_minus1 = fs.readdirSync(DirName_minus1);
+  console.log(rootDirName_minus1);
+  console.log("---")
+
+  // Log root directory
+  console.log("Root directory: ", process.cwd());
+  const rootDirContent = fs.readdirSync(process.cwd());
+  console.log(rootDirContent);
+  console.log("---")
+
+  // Log Year path
+  const yearPath = path.join(__dirname, "..", "images", year);
+  console.log("Year Path: ", yearPath);
+  // const yearPathContent = fs.readdirSync(yearPath);
+  // console.log(yearPathContent);
+  console.log("---")
+
+  // Log entire directory structure starting from root
+  // console.log("Entire Directory Structure (var):");
+  // traverseDir(DirName_minus1);
+  // console.log("---")
+
+  try {
+    const files = fs.readdirSync(yearPath);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(files)
+    };
+  } catch (error) {
+    console.error('Server error:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};
+--------------------------------------------
+netlify.toml
+
+[build]
+  functions = "src/functions"
+  publish = "src"
+--------------------------------------------
+
+When I test the webapp locally, everything works.
+However, when I deploy it (on Github pages) and run it the function get-images.js cannot find the year folder. Thus, the images are not displayed.
+
+What am I doing wrong?
