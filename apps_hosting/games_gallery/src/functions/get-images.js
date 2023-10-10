@@ -26,31 +26,31 @@ exports.handler = async function (event, context) {
   // Log current directory
   console.log("Current directory: ", __dirname);
   const rootDirName = fs.readdirSync(__dirname);
-  console.log("Content of current directory: ", rootDirName);
+  console.log(rootDirName);
   console.log("---")
 
   // Log current directory - 1
   const DirName_minus1 = path.join(__dirname, "..");
   console.log("Current directory - 1: ", DirName_minus1);
   const rootDirName_minus1 = fs.readdirSync(DirName_minus1);
-  console.log("Content of current directory - 1: ", rootDirName_minus1);
+  console.log(rootDirName_minus1);
   console.log("---")
 
   // Log root directory
   console.log("Root directory: ", process.cwd());
   const rootDirContent = fs.readdirSync(process.cwd());
-  console.log("Content of root directory: ", rootDirContent);
+  console.log(rootDirContent);
   console.log("---")
 
   // Log Year path
   const yearPath = path.join(__dirname, "..", "images", year);
   console.log("Year Path: ", yearPath);
-  const yearPathContent = fs.readdirSync(yearPath);
-  console.log("Content of root directory: ", yearPathContent);
+  // const yearPathContent = fs.readdirSync(yearPath);
+  // console.log(yearPathContent);
   console.log("---")
 
   // Log entire directory structure starting from root
-  console.log("\nEntire Directory Structure:");
+  console.log("Entire Directory Structure:");
   traverseDir(process.cwd());
   console.log("---")
 
