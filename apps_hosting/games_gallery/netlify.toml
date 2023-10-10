@@ -1,3 +1,7 @@
 [build]
   functions = "src/functions"
   publish = "src"
+
+# Include all files in all functions
+[functions]
+  included_files = ["languages/**"]

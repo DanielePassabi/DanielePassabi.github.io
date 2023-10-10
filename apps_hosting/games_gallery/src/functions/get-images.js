@@ -28,8 +28,8 @@ const traverseDir = (dir, level = 0) => {
 };
 
 exports.handler = async function (event, context) {
+
   const year = event.queryStringParameters.year;
-  
 
   // Log current directory
   console.log("Current directory: ", __dirname);
