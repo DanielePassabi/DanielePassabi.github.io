@@ -4,4 +4,4 @@
 
 # Include all files in all functions
 [functions]
-  included_files = ["languages/**"]
+  included_files = ["src/functions/images/**"]
