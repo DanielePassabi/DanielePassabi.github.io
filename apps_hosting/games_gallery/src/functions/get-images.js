@@ -8,7 +8,7 @@ const traverseDir = (dir, level = 0) => {
   // Log each file and folder
   files.forEach(file => {
     console.log('  '.repeat(level) + '├─ ' + file);
-    
+
     // Check if it's a directory
     const filePath = path.join(dir, file);
     const stats = fs.statSync(filePath);
@@ -22,18 +22,28 @@ const traverseDir = (dir, level = 0) => {
 exports.handler = async function (event, context) {
   const year = event.queryStringParameters.year;
   const dirPath = path.join(__dirname, "..", "images", year);
-  
-  // Log root directory
-  console.log("Root directory: ", process.cwd());
-  
+
   // Log current directory
   console.log("Current directory: ", __dirname);
+  fs.readdir(__dirname, (err, files) => {
+    files.forEach(file => {
+      console.log(" - ", file);
+    });
+  });
+
+  // Log root directory
+  console.log("\nRoot directory: ", process.cwd());
+  fs.readdir(process.cwd(), (err, files) => {
+    files.forEach(file => {
+      console.log(" - ", file);
+    });
+  });
 
   // Log directory path
-  console.log("dirPath: ", dirPath);
+  console.log("\nYear Path: ", dirPath);
 
   // Log entire directory structure starting from root
-  console.log("Entire Directory Structure:");
+  console.log("\nEntire Directory Structure:");
   traverseDir(process.cwd());
 
   try {
