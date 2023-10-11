@@ -39,6 +39,10 @@ index.html
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A gallery of my gaming adventures.">
+    <meta name="keywords" content="games, gallery, adventures">
+    <meta name="author" content="Daniele Passabì">
+    
     <title>Games Gallery | Daniele Passabì</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -134,7 +138,7 @@ button {
 script.js
 
 let selectedButton = null;  // to keep track of the currently selected button
-const years = ['2022', '2023'];  // you can dynamically populate this later
+const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'];  // you can dynamically populate this later
 
 window.addEventListener('DOMContentLoaded', () => {
     const yearsContainer = document.getElementById('years-container');
@@ -173,7 +177,7 @@ async function loadImages(year) {
         if (Array.isArray(imageFiles)) {
             imageFiles.forEach(file => {
                 const imgElement = document.createElement('img');
-                imgElement.src = `../images/${year}/${file}`;
+                imgElement.src = `functions/images/${year}/${file}`;
                 imgElement.alt = `${year} - ${file}`;
     
                 const aspectRatioBox = document.createElement('div');
@@ -194,6 +198,7 @@ async function loadImages(year) {
         console.error('Error fetching images:', error);
     }
 }
+
 --------------------------------------------
 get-images.js
 
@@ -227,20 +232,13 @@ const traverseDir = (dir, level = 0) => {
 };
 
 exports.handler = async function (event, context) {
+
   const year = event.queryStringParameters.year;
-  
 
   // Log current directory
   console.log("Current directory: ", __dirname);
   const rootDirName = fs.readdirSync(__dirname);
   console.log(rootDirName);
-  console.log("---")
-
-  // Log current directory - 1
-  const DirName_minus1 = path.join(__dirname, "..");
-  console.log("Current directory - 1: ", DirName_minus1);
-  const rootDirName_minus1 = fs.readdirSync(DirName_minus1);
-  console.log(rootDirName_minus1);
   console.log("---")
 
   // Log root directory
@@ -250,19 +248,14 @@ exports.handler = async function (event, context) {
   console.log("---")
 
   // Log Year path
-  const yearPath = path.join(__dirname, "..", "images", year);
+  const yearPath = path.join(__dirname, "images", year);
   console.log("Year Path: ", yearPath);
-  // const yearPathContent = fs.readdirSync(yearPath);
-  // console.log(yearPathContent);
   console.log("---")
-
-  // Log entire directory structure starting from root
-  // console.log("Entire Directory Structure (var):");
-  // traverseDir(DirName_minus1);
-  // console.log("---")
 
   try {
     const files = fs.readdirSync(yearPath);
+    console.log('Files in yearPath:', files);
+
     return {
       statusCode: 200,
       body: JSON.stringify(files)
@@ -275,15 +268,21 @@ exports.handler = async function (event, context) {
     };
   }
 };
+
 --------------------------------------------
 netlify.toml
 
 [build]
   functions = "src/functions"
   publish = "src"
+
+# Include all files in all functions
+[functions]
+  included_files = ["src/functions/images/**"]
 --------------------------------------------
 
-When I test the webapp locally, everything works.
-However, when I deploy it (on Github pages) and run it the function get-images.js cannot find the year folder. Thus, the images are not displayed.
+I have a website deployed on netlify.
+I use it to dinamically display images.
 
-What am I doing wrong?
+When I hover on a image, I would like it for it to rotate horizontally and display the name of the image.
+Please update each piece of my code with the necessary changes.
