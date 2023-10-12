@@ -79,8 +79,11 @@ index.html
 </body>
 
 </html>
+
 --------------------------------------------
 styles.css
+
+/* GENERAL */
 
 .html {
     background-color: #F4F4F4;
@@ -107,6 +110,7 @@ styles.css
     transition-duration: 0.5s;
 }
 
+
 /* TEXT SETTINGS */
 button {
     font-size: 1.25vw !important;
@@ -115,9 +119,49 @@ button {
 
 /* ANIMATION SETTINGS */
 
-.aspect-ratio-box>img:hover {
-    transform: scale(1.05);
+.aspect-ratio-box {
+    position: relative;
+    transform-style: preserve-3d;
+    z-index: 0;
 }
+
+.aspect-ratio-box>img {
+    backface-visibility: hidden;
+    transition: transform 1s;
+    z-index: 1;
+}
+
+.aspect-ratio-box>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 1s;
+    z-index: 1;
+}
+
+.aspect-ratio-box>.image-label {
+    background: linear-gradient(45deg, #212529, #A4ADB6);
+    color: #F4F4F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transform: rotateY(180deg);
+}
+
+.aspect-ratio-box:hover>img {
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+.aspect-ratio-box:hover>.image-label {
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
 
 /* OVERRIDE BOOTSTRAP SETTINGS */
 
@@ -126,13 +170,47 @@ button {
     height: fit-content;
 }
 
+.btn:hover {
+    --bs-btn-hover-border-color: none;
+}
+
 .container {
     max-width: 90%;
 }
 
 .me-2 {
-    margin-right: 0rem!important;
+    margin-right: 0rem !important;
     border: 1px #F4F4F4 solid;
+}
+
+
+/* INFO BEHIND IMAGES */
+
+.aspect-ratio-box {
+    position: relative;
+}
+
+.image-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.aspect-ratio-box:hover .image-label {
+    opacity: 1;
+}
+
+.image-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.35vw !important;
+    padding: 1vw;
+}
+
+.image-time {
+    text-align: center;
+    font-size: 1.25vw !important;
 }
 --------------------------------------------
 script.js
@@ -166,6 +244,11 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/**
+ * Asynchronously load images and display them on the web page.
+ * 
+ * @param {number} year - The year for which to load images.
+ */
 async function loadImages(year) {
     const imagesContainer = document.getElementById('images-container');
     imagesContainer.innerHTML = '';  // clear previous images
@@ -176,27 +259,83 @@ async function loadImages(year) {
 
         if (Array.isArray(imageFiles)) {
             imageFiles.forEach(file => {
+                // Create and configure img element
                 const imgElement = document.createElement('img');
                 imgElement.src = `functions/images/${year}/${file}`;
                 imgElement.alt = `${year} - ${file}`;
-    
+
+                // Initialize variables to hold extracted information
+                let number = "missing!";
+                let name = "missing!";
+                let time = "missing!";
+
+                // Extract information from filename
+                const [numberMaybe, rest] = file.split(' - ');
+                if (rest) {
+                    number = numberMaybe;
+                    const [nameMaybe, timeWithExtension] = rest.split('_');
+                    if (nameMaybe) name = nameMaybe;
+                    if (timeWithExtension) {
+                        const [timeMaybe] = timeWithExtension.split('.');
+                        if (timeMaybe) time = timeMaybe;
+                    }
+                }
+
+                // Create label with extracted info
+                const labelElement = createImageLabel(number, name, time);
+
+                // Create and configure aspect-ratio box
                 const aspectRatioBox = document.createElement('div');
                 aspectRatioBox.className = 'aspect-ratio-box';
                 aspectRatioBox.appendChild(imgElement);
-    
+                aspectRatioBox.appendChild(labelElement);
+
+                // Create and configure column element
                 const colElement = document.createElement('div');
-                colElement.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';  // Added margin-bottom (mb-4) for spacing
+                colElement.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';
                 colElement.appendChild(aspectRatioBox);
-    
+
                 imagesContainer.appendChild(colElement);
             });
         } else {
             console.error('Unexpected response:', imageFiles);
         }
-
     } catch (error) {
         console.error('Error fetching images:', error);
     }
+}
+
+/**
+ * Create a label for an image.
+ * 
+ * @param {string} number - The image number.
+ * @param {string} name - The image name.
+ * @param {string} time - The image time.
+ * @returns {Element} - The label element.
+ */
+function createImageLabel(number, name, time) {
+    const labelElement = document.createElement('div');
+    labelElement.className = 'image-label';
+
+    const numberElement = document.createElement('p');
+    numberElement.className = 'image-number';
+    numberElement.textContent = number;
+
+    const nameElement = document.createElement('p');
+    nameElement.className = 'image-name';
+    nameElement.textContent = name;
+
+    const timeElement = document.createElement('p');
+    timeElement.className = 'image-time';
+    timeElement.textContent = '⏰' + time;
+
+    // Uncomment to add the number element.
+    // labelElement.appendChild(numberElement);
+
+    labelElement.appendChild(nameElement);
+    labelElement.appendChild(timeElement);
+
+    return labelElement;
 }
 
 --------------------------------------------
@@ -284,5 +423,4 @@ netlify.toml
 I have a website deployed on netlify.
 I use it to dinamically display images.
 
-When I hover on a image, I would like it for it to rotate horizontally and display the name of the image.
-Please update each piece of my code with the necessary changes.
+I would like the site to be more responsive on mobile.

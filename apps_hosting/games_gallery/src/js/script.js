@@ -108,9 +108,16 @@ function createImageLabel(number, name, time) {
     nameElement.className = 'image-name';
     nameElement.textContent = name;
 
+    const timeIcon = document.createElement('img');
+    timeIcon.src = 'icons/hourglass.png';
+    timeIcon.alt = 'Time Icon';
+    timeIcon.style.width = '16px';  // You can adjust this value based on your design preferences
+    timeIcon.style.height = '16px'; // Same here
+
     const timeElement = document.createElement('p');
     timeElement.className = 'image-time';
-    timeElement.textContent = '⏰' + time;
+    timeElement.appendChild(timeIcon);
+    timeElement.innerHTML += ` ${time}`;  // Appending the time after the icon
 
     // Uncomment to add the number element.
     // labelElement.appendChild(numberElement);
