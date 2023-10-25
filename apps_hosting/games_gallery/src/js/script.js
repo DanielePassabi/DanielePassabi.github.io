@@ -3,6 +3,7 @@ const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']; 
 
 window.addEventListener('DOMContentLoaded', () => {
     const yearsContainer = document.getElementById('years-container');
+    let currentYearButton = null;  // To store the button for the current year
 
     years.forEach(year => {
         const yearButton = document.createElement('button');
@@ -23,9 +24,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
             loadImages(year);
         };
+        
+        if (year === years[years.length - 1]) {  // Check if this is the last (current) year
+            currentYearButton = yearButton;
+        }
+
         yearsContainer.appendChild(yearButton);
     });
+
+    // Click the button for the current year to set it as the default
+    if (currentYearButton) {
+        currentYearButton.click();
+    }
 });
+
 
 /**
  * Asynchronously load images and display them on the web page.
@@ -111,8 +123,8 @@ function createImageLabel(number, name, time) {
     const timeIcon = document.createElement('img');
     timeIcon.src = 'icons/hourglass.png';
     timeIcon.alt = 'Time Icon';
-    timeIcon.style.width = '16px';  // You can adjust this value based on your design preferences
-    timeIcon.style.height = '16px'; // Same here
+    timeIcon.style.width = '1.25vw';  // You can adjust this value based on your design preferences
+    timeIcon.style.height = '1.25vw'; // Same here
 
     const timeElement = document.createElement('p');
     timeElement.className = 'image-time';

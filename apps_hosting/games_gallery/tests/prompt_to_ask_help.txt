@@ -63,7 +63,7 @@ index.html
 
 <body>
     <div class="container mt-5">
-        <h1>Games Gallery</h1>
+        <h1>GAMES GALLERY</h1>
         <p>Click on a year to explore my gaming adventures!</p>
         <div id="years-container" class="btn-group mt-3 mb-5" role="group">
             <!-- Years will be populated here -->
@@ -113,9 +113,24 @@ styles.css
 
 /* TEXT SETTINGS */
 button {
-    font-size: 1.25vw !important;
+    font-size: large !important;
 }
 
+p {
+    font-size: large;
+}
+
+h1, p {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, p, .btn {
+    font-family: 'Raleway', sans-serif;
+}
 
 /* ANIMATION SETTINGS */
 
@@ -212,6 +227,50 @@ button {
     text-align: center;
     font-size: 1.25vw !important;
 }
+
+/* RESPONSIVENESS */
+
+@media (max-width: 768px) {
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-group>.btn-group:not(:last-child)>.btn, 
+    .btn-group>.btn.dropdown-toggle-split:first-child, 
+    .btn-group>.btn:not(:last-child):not(.dropdown-toggle), 
+    .btn-group>.btn-group:not(:first-child)>.btn, 
+    .btn-group>.btn:nth-child(n+3), 
+    .btn-group>:not(.btn-check)+.btn {
+        border-radius: 5px !important;
+    }
+
+    .btn-group .btn {
+       font-size: 3vw !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 0.75rem!important;
+    }
+
+    .image-name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 5.5vw !important;
+        padding: 2vw;
+    }
+    
+    .image-time {
+        text-align: center;
+        font-size: 5vw !important;
+    }
+    
+
+}
+
 --------------------------------------------
 script.js
 
@@ -325,9 +384,16 @@ function createImageLabel(number, name, time) {
     nameElement.className = 'image-name';
     nameElement.textContent = name;
 
+    const timeIcon = document.createElement('img');
+    timeIcon.src = 'icons/hourglass.png';
+    timeIcon.alt = 'Time Icon';
+    timeIcon.style.width = '1.25vw';  // You can adjust this value based on your design preferences
+    timeIcon.style.height = '1.25vw'; // Same here
+
     const timeElement = document.createElement('p');
     timeElement.className = 'image-time';
-    timeElement.textContent = '⏰' + time;
+    timeElement.appendChild(timeIcon);
+    timeElement.innerHTML += ` ${time}`;  // Appending the time after the icon
 
     // Uncomment to add the number element.
     // labelElement.appendChild(numberElement);
