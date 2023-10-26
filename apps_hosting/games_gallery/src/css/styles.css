@@ -35,7 +35,8 @@ p {
     font-size: large;
 }
 
-h1, p {
+h1,
+p {
     font-family: 'Raleway', sans-serif;
     display: flex;
     flex-direction: column;
@@ -43,7 +44,9 @@ h1, p {
     justify-content: center;
 }
 
-h1, p, .btn {
+h1,
+p,
+.btn {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -73,7 +76,7 @@ h1, p, .btn {
 }
 
 .aspect-ratio-box>.image-label {
-    background: linear-gradient(45deg, #212529, #A4ADB6);
+    background: linear-gradient(45deg, #212529, #198754);
     color: #F4F4F4;
     display: flex;
     align-items: center;
@@ -113,6 +116,16 @@ h1, p, .btn {
     border: 1px #F4F4F4 solid;
 }
 
+/* BEST IMAGES and NOT COMPLETED IMAGES */
+
+.best-image .image-label {
+    background: linear-gradient(45deg, #212529, #8a7918);
+}
+
+.not-completed-image .image-label {
+    background: linear-gradient(45deg, #212529, #5e1212);
+}
+
 
 /* INFO BEHIND IMAGES */
 
@@ -141,6 +154,7 @@ h1, p, .btn {
 .image-time {
     text-align: center;
     font-size: 1.25vw !important;
+    border: 0px solid #198754 !important;
 }
 
 /* RESPONSIVENESS */
@@ -154,21 +168,21 @@ h1, p, .btn {
         flex-wrap: wrap;
     }
 
-    .btn-group>.btn-group:not(:last-child)>.btn, 
-    .btn-group>.btn.dropdown-toggle-split:first-child, 
-    .btn-group>.btn:not(:last-child):not(.dropdown-toggle), 
-    .btn-group>.btn-group:not(:first-child)>.btn, 
-    .btn-group>.btn:nth-child(n+3), 
+    .btn-group>.btn-group:not(:last-child)>.btn,
+    .btn-group>.btn.dropdown-toggle-split:first-child,
+    .btn-group>.btn:not(:last-child):not(.dropdown-toggle),
+    .btn-group>.btn-group:not(:first-child)>.btn,
+    .btn-group>.btn:nth-child(n+3),
     .btn-group>:not(.btn-check)+.btn {
         border-radius: 5px !important;
     }
 
     .btn-group .btn {
-       font-size: 3vw !important;
+        font-size: 3vw !important;
     }
 
     .mb-4 {
-        margin-bottom: 0.75rem!important;
+        margin-bottom: 0.75rem !important;
     }
 
     .image-name {
@@ -177,11 +191,11 @@ h1, p, .btn {
         font-size: 5.5vw !important;
         padding: 2vw;
     }
-    
+
     .image-time {
         text-align: center;
         font-size: 5vw !important;
     }
-    
+
 
 }

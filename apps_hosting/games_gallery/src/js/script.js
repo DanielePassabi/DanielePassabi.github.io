@@ -60,21 +60,12 @@ async function loadImages(year) {
                 imgElement.alt = `${year} - ${file}`;
 
                 // Initialize variables to hold extracted information
-                let number = "missing!";
-                let name = "missing!";
-                let time = "missing!";
+                // let number = "missing!";
+                // let name = "missing!";
+                // let time = "missing!";
 
                 // Extract information from filename
-                const [numberMaybe, rest] = file.split(' - ');
-                if (rest) {
-                    number = numberMaybe;
-                    const [nameMaybe, timeWithExtension] = rest.split('_');
-                    if (nameMaybe) name = nameMaybe;
-                    if (timeWithExtension) {
-                        const [timeMaybe] = timeWithExtension.split('.');
-                        if (timeMaybe) time = timeMaybe;
-                    }
-                }
+                const [number, name, time, ranking] = file.split('_');
 
                 // Create label with extracted info
                 const labelElement = createImageLabel(number, name, time);
@@ -82,6 +73,16 @@ async function loadImages(year) {
                 // Create and configure aspect-ratio box
                 const aspectRatioBox = document.createElement('div');
                 aspectRatioBox.className = 'aspect-ratio-box';
+
+                // Check for "best" ranking and apply special style if applicable
+                if (ranking === 'best') {
+                    aspectRatioBox.classList.add('best-image');
+                }
+
+                if (ranking === 'not-completed') {
+                    aspectRatioBox.classList.add('not-completed-image');
+                }
+
                 aspectRatioBox.appendChild(imgElement);
                 aspectRatioBox.appendChild(labelElement);
 
