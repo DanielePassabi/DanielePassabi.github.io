@@ -158,6 +158,16 @@ async function loadImages(year) {
                 // Create and configure aspect-ratio box
                 const aspectRatioBox = document.createElement('div');
                 aspectRatioBox.className = 'aspect-ratio-box';
+
+                // Check for "best" ranking and apply special style if applicable
+                if (ranking === 'best') {
+                    aspectRatioBox.classList.add('best-image');
+                }
+
+                if (ranking === 'not-completed') {
+                    aspectRatioBox.classList.add('not-completed-image');
+                }
+
                 aspectRatioBox.appendChild(imgElement);
                 aspectRatioBox.appendChild(labelElement);
 
@@ -301,4 +311,4 @@ netlify.toml
 I have a website deployed on netlify.
 I use it to dinamically display images.
 
-I would like the site to be more responsive on mobile.
+I would like ...

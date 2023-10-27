@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             loadImages(year);
         };
-        
+
         if (year === years[years.length - 1]) {  // Check if this is the last (current) year
             currentYearButton = yearButton;
         }
@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Asynchronously load images and display them on the web page.
- * 
+ *
  * @param {number} year - The year for which to load images.
  */
 async function loadImages(year) {
@@ -58,11 +58,6 @@ async function loadImages(year) {
                 const imgElement = document.createElement('img');
                 imgElement.src = `functions/images/${year}/${file}`;
                 imgElement.alt = `${year} - ${file}`;
-
-                // Initialize variables to hold extracted information
-                // let number = "missing!";
-                // let name = "missing!";
-                // let time = "missing!";
 
                 // Extract information from filename
                 const [number, name, time, ranking] = file.split('_');
@@ -93,6 +88,7 @@ async function loadImages(year) {
 
                 imagesContainer.appendChild(colElement);
             });
+
         } else {
             console.error('Unexpected response:', imageFiles);
         }
@@ -103,7 +99,7 @@ async function loadImages(year) {
 
 /**
  * Create a label for an image.
- * 
+ *
  * @param {string} number - The image number.
  * @param {string} name - The image name.
  * @param {string} time - The image time.

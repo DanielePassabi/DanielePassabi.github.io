@@ -56,6 +56,8 @@ p,
     position: relative;
     transform-style: preserve-3d;
     z-index: 0;
+    transition: transform 1s ease;
+    /* For flipping back */
 }
 
 .aspect-ratio-box>img {
@@ -130,7 +132,7 @@ p,
 /* INFO BEHIND IMAGES */
 
 .aspect-ratio-box {
-    position: relative;
+    position: static;
 }
 
 .image-label {
@@ -197,5 +199,9 @@ p,
         font-size: 5vw !important;
     }
 
+    .image-time img {
+        width: 18px !important;
+        height: auto !important;
+    }
 
 }
