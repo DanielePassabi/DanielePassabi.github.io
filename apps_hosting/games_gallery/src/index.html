@@ -7,7 +7,7 @@
     <meta name="description" content="A gallery of my gaming adventures.">
     <meta name="keywords" content="games, gallery, adventures">
     <meta name="author" content="Daniele Passabì">
-    
+
     <title>Games Gallery | Daniele Passabì</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -30,6 +30,7 @@
     <div class="container mt-5">
         <h1>GAMES GALLERY</h1>
         <p>Click on a year to explore my gaming adventures!</p>
+
         <div id="years-container" class="btn-group mt-3 mb-5" role="group">
             <!-- Years will be populated here -->
         </div>
@@ -39,8 +40,27 @@
                 <!-- Images will be displayed here -->
             </div>
         </div>
+
+        <!-- Audio element for background music -->
+        <div>
+            <audio id="bg-music" loop>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Button to control background music -->
+        <button class="btn-music btn btn-dark" onclick="toggleMusic()">
+            <span id="song-name">Play Some Music 🎸</span>
+        </button>
+
+        <!-- Audio element for music on hover -->
+        <audio id="hover-sound" preload="auto">
+            <source src="music/flipcard.mp3" type="audio/mp3">
+        </audio>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/custom-music.js"></script> <!-- Add this line to include your custom script -->
+
 </body>
 
 </html>

@@ -1,5 +1,10 @@
 /* GENERAL */
 
+::selection {
+    background: #212529;
+    color: #FFFFFF;
+}
+
 .html {
     background-color: #F4F4F4;
     font-family: 'Raleway', sans-serif;
@@ -84,11 +89,11 @@ p,
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(1.2);
 }
 
 .aspect-ratio-box:hover>img {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(1.2);
     z-index: 1;
 }
 
@@ -159,6 +164,32 @@ p,
     border: 0px solid #198754 !important;
 }
 
+/* MUSIC */
+
+/* Add this to your existing CSS file */
+.btn-music {
+    overflow: hidden;
+    white-space: nowrap;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+#song-name {
+    animation: scrolling 5s linear infinite;
+}
+
+@keyframes scrolling {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
 /* RESPONSIVENESS */
 
 @media (max-width: 768px) {
@@ -180,7 +211,7 @@ p,
     }
 
     .btn-group .btn {
-        font-size: 3vw !important;
+        font-size: 4vw !important;
     }
 
     .mb-4 {
@@ -202,6 +233,10 @@ p,
     .image-time img {
         width: 18px !important;
         height: auto !important;
+    }
+
+    .btn-music {
+        font-size: 3vw !important;
     }
 
 }

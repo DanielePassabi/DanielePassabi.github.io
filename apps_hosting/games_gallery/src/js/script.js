@@ -38,6 +38,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Preload the audio file for immediate playback
+const hoverSound = new Audio('music/flipcard.mp3');
+
+document.addEventListener('DOMContentLoaded', function () {
+    const boxes = document.querySelectorAll('.aspect-ratio-box');
+
+    boxes.forEach(box => {
+        box.addEventListener('mouseover', function () {
+            hoverSound.play();
+        });
+    });
+});
+
 
 /**
  * Asynchronously load images and display them on the web page.
@@ -87,6 +100,14 @@ async function loadImages(year) {
                 colElement.appendChild(aspectRatioBox);
 
                 imagesContainer.appendChild(colElement);
+
+                // Attach sound hover after generating the images
+                const boxes = document.querySelectorAll('.aspect-ratio-box');
+                boxes.forEach(box => {
+                    box.addEventListener('mouseover', function () {
+                        hoverSound.play();
+                    });
+                });
             });
 
         } else {
