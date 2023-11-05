@@ -129,6 +129,10 @@ p,
     background: linear-gradient(45deg, #212529, #8a7918);
 }
 
+.multiplayer-image .image-label {
+    background: linear-gradient(45deg, #212529, #181f83);
+}
+
 .not-completed-image .image-label {
     background: linear-gradient(45deg, #212529, #5e1212);
 }

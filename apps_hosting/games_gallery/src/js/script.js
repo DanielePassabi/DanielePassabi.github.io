@@ -87,6 +87,11 @@ async function loadImages(year) {
                     aspectRatioBox.classList.add('best-image');
                 }
 
+                // Check for "best" ranking and apply special style if applicable
+                if (ranking === 'multiplayer') {
+                    aspectRatioBox.classList.add('multiplayer-image');
+                }
+
                 if (ranking === 'not-completed') {
                     aspectRatioBox.classList.add('not-completed-image');
                 }
