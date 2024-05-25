@@ -1,0 +1,289 @@
+I am building a netlify application.
+
+These are the main components.
+
+---
+src/css/styles.css
+
+/* General */
+
+body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Title */
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* breadcrumbs */
+
+#breadcrumbs {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#breadcrumbs span {
+    color: #333;
+}
+
+#home-breadcrumb {
+    cursor: pointer;
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+#breadcrumbs span:hover {
+    text-decoration: none;
+}
+
+/* Folders and images */
+
+#content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-auto-rows: 300px; /* Adjust this value to control row height */
+    gap: 10px;
+    padding: 10px;
+}
+
+.folder, .image {
+    border: 1px solid #ccc;
+    padding: 0px;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.folder:hover, .image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.folder {
+    background-color: #F29CA3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.folder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 80%;
+    height: 30%;
+    background-color: #F7CACD;
+    border-radius: 0px 0px 0 0;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the entire container */
+    display: block;
+    border-radius: 0px;
+    transition: transform 0.3s; /* Smooth transition for expansion */
+}
+
+.image.expanded img {
+    transform: scale(2); /* Scale up the image on expansion */
+}
+
+/* Full-screen image view */
+.image.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image.fullscreen img {
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+---
+src/functions/getContents.js
+
+const fs = require('fs');
+const path = require('path');
+
+exports.handler = async (event, context) => {
+    let directory = event.queryStringParameters.directory || '';
+    directory = directory.replace(/^\//, '');  // Remove leading slash if present
+
+    const dirPath = path.join(__dirname, '../functions/pictures', directory);
+
+    console.log(`Requested directory: ${directory}`);
+    console.log(`Resolved path: ${dirPath}`);
+
+    try {
+        const contents = fs.readdirSync(dirPath).map(name => {
+            const filePath = path.join(dirPath, name);
+            const isDirectory = fs.statSync(filePath).isDirectory();
+            return {
+                name,
+                type: isDirectory ? 'folder' : 'image'
+            };
+        });
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify(contents)
+        };
+    } catch (error) {
+        console.error(`Error reading directory: ${error.message}`);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Unable to read directory' })
+        };
+    }
+};
+
+---
+src/js/app.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contentDiv = document.getElementById('content');
+    const breadcrumbsDiv = document.getElementById('breadcrumbs');
+
+    // Function to fetch and display folders and images
+    function displayContents(path) {
+        fetch(`/.netlify/functions/getContents?directory=${path}`)
+            .then(response => response.json())
+            .then(data => {
+                contentDiv.innerHTML = '';
+                updateBreadcrumbs(path);
+
+                data.forEach(item => {
+                    if (item.type === 'folder') {
+                        const folderDiv = document.createElement('div');
+                        folderDiv.className = 'folder';
+                        folderDiv.textContent = item.name;
+                        folderDiv.onclick = () => navigateTo(`${path ? path + '/' : ''}${item.name}`);
+                        contentDiv.appendChild(folderDiv);
+                    } else if (item.type === 'image') {
+                        const imageDiv = document.createElement('div');
+                        imageDiv.className = 'image';
+                        const img = document.createElement('img');
+                        img.src = `functions/pictures/${path ? path + '/' : ''}${item.name}`;
+                        img.onclick = () => toggleImageExpansion(imageDiv);
+                        imageDiv.appendChild(img);
+                        contentDiv.appendChild(imageDiv);
+                    }
+                });
+            });
+    }
+
+    // Function to update breadcrumbs
+    function updateBreadcrumbs(path) {
+        const parts = path.split('/').filter(Boolean);
+        breadcrumbsDiv.innerHTML = '';
+
+        // Add Home link
+        const homeSpan = document.createElement('span');
+        homeSpan.textContent = 'Home 🏠';
+        homeSpan.id = 'home-breadcrumb';
+        homeSpan.onclick = () => navigateTo('');
+        breadcrumbsDiv.appendChild(homeSpan);
+
+        // Add separator and current path parts
+        if (parts.length > 0) {
+            const separator = document.createTextNode(' / ');
+            breadcrumbsDiv.appendChild(separator);
+
+            const currentPathSpan = document.createElement('span');
+            currentPathSpan.textContent = parts.join(' / ');
+            breadcrumbsDiv.appendChild(currentPathSpan);
+        }
+    }
+
+    // Function to toggle image expansion
+    function toggleImageExpansion(imageDiv) {
+        if (imageDiv.classList.contains('fullscreen')) {
+            imageDiv.classList.remove('fullscreen');
+        } else {
+            const expanded = document.querySelector('.fullscreen');
+            if (expanded) expanded.classList.remove('fullscreen');
+            imageDiv.classList.add('fullscreen');
+        }
+    }
+
+    // Function to handle navigation and update the URL
+    function navigateTo(path) {
+        window.history.pushState({ path }, '', `?path=${path}`);
+        displayContents(path);
+    }
+
+    // Handle back and forward browser navigation
+    window.onpopstate = (event) => {
+        if (event.state) {
+            displayContents(event.state.path);
+        } else {
+            displayContents('');
+        }
+    };
+
+    // Initial load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialPath = urlParams.get('path') || '';
+    displayContents(initialPath);
+});
+---
+src/index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniele Passabì">
+
+    <title>Memories | Daniele Passabì</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Custom Icon -->
+    <link rel="icon" href="icons/website_icon.png">
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+    <h1>MEMORIES</h1>
+    <div id="breadcrumbs"></div>
+    <div id="content"></div>
+    <script src="js/app.js"></script>
+</body>
+</html>
+---
+
+I have a problem: when I test it locally I see everything correctly, in terms of folders and subfolders, but when I deploy the app I see nothing. The "pictures" dir seems to be uploaded correctly, what am I missing?
+
+The error seems to be: Failed to load resource: the server responded with a status of 500 ()

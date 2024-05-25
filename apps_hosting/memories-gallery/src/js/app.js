@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.getElementById('content');
     const breadcrumbsDiv = document.getElementById('breadcrumbs');
 
-    // Function to fetch and display folders and images
     function displayContents(path) {
         fetch(`/.netlify/functions/getContents?directory=${path}`)
             .then(response => response.json())
@@ -21,28 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         const imageDiv = document.createElement('div');
                         imageDiv.className = 'image';
                         const img = document.createElement('img');
+                        // Update the image path to point to the correct directory
                         img.src = `functions/pictures/${path ? path + '/' : ''}${item.name}`;
                         img.onclick = () => toggleImageExpansion(imageDiv);
                         imageDiv.appendChild(img);
                         contentDiv.appendChild(imageDiv);
                     }
                 });
+            }).catch(error => {
+                console.error('Error fetching contents:', error);
             });
     }
 
-    // Function to update breadcrumbs
     function updateBreadcrumbs(path) {
         const parts = path.split('/').filter(Boolean);
         breadcrumbsDiv.innerHTML = '';
 
-        // Add Home link
         const homeSpan = document.createElement('span');
         homeSpan.textContent = 'Home 🏠';
         homeSpan.id = 'home-breadcrumb';
         homeSpan.onclick = () => navigateTo('');
         breadcrumbsDiv.appendChild(homeSpan);
 
-        // Add separator and current path parts
         if (parts.length > 0) {
             const separator = document.createTextNode(' / ');
             breadcrumbsDiv.appendChild(separator);
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to toggle image expansion
     function toggleImageExpansion(imageDiv) {
         if (imageDiv.classList.contains('fullscreen')) {
             imageDiv.classList.remove('fullscreen');
@@ -64,13 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to handle navigation and update the URL
     function navigateTo(path) {
         window.history.pushState({ path }, '', `?path=${path}`);
         displayContents(path);
     }
 
-    // Handle back and forward browser navigation
     window.onpopstate = (event) => {
         if (event.state) {
             displayContents(event.state.path);
@@ -79,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Initial load
     const urlParams = new URLSearchParams(window.location.search);
     const initialPath = urlParams.get('path') || '';
     displayContents(initialPath);
