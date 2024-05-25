@@ -1,0 +1,6 @@
+[build]
+  functions = "src/functions"
+  publish = "src"
+
+[functions]
+  included_files = ["src/functions/pictures/**"]

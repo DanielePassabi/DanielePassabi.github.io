@@ -1,0 +1,120 @@
+/* General */
+
+body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Title */
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* breadcrumbs */
+
+#breadcrumbs {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#breadcrumbs span {
+    color: #333;
+}
+
+#home-breadcrumb {
+    cursor: pointer;
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+#breadcrumbs span:hover {
+    text-decoration: none;
+}
+
+/* Folders and images */
+
+#content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-auto-rows: 300px; /* Adjust this value to control row height */
+    gap: 10px;
+    padding: 10px;
+}
+
+.folder, .image {
+    border: 1px solid #ccc;
+    padding: 0px;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.folder:hover, .image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.folder {
+    background-color: #F29CA3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.folder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 80%;
+    height: 30%;
+    background-color: #F7CACD;
+    border-radius: 0px 0px 0 0;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the entire container */
+    display: block;
+    border-radius: 0px;
+    transition: transform 0.3s; /* Smooth transition for expansion */
+}
+
+.image.expanded img {
+    transform: scale(2); /* Scale up the image on expansion */
+}
+
+/* Full-screen image view */
+.image.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image.fullscreen img {
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
