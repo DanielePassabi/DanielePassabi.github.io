@@ -1,5 +1,5 @@
 let selectedButton = null;  // to keep track of the currently selected button
-const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];  // you can dynamically populate this later
+const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'];  // you can dynamically populate this later
 
 window.addEventListener('DOMContentLoaded', () => {
     const yearsContainer = document.getElementById('years-container');
